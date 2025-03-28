@@ -1,0 +1,1 @@
+# pharmagob-manager-auth
