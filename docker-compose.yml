@@ -1,0 +1,17 @@
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    image: pharma_services
+    command: >
+      sh /start-web-dev
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    restart: always
+    env_file:
+      - ./.env
+
+
