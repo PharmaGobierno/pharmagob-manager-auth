@@ -1,3 +1,5 @@
+import os
+
 import uvicorn
 from fastapi import FastAPI, status
 
@@ -11,7 +13,6 @@ def create_app() -> FastAPI:
 
     # Routers
     app.include_router(api_router, prefix="/v1")
-
     return app
 
 
@@ -21,8 +22,8 @@ app = create_app()
 @app.get("/")
 async def health_check():
     a = status.HTTP_200_OK
-    return f"{a}, ready"
+    return f"{a}, OK"
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, port=8080)
+    uvicorn.run(app, port=int(os.environ.get("PORT", 8080)), host="0.0.0.0")

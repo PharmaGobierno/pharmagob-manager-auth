@@ -20,7 +20,7 @@ async def post_token(
 ) -> dict:
     """Endpoint ..."""
     controller_input: LoginSchema = LoginSchema.model_validate(await request.json())
-    controller = AuthenticationController()
+    controller = AuthenticationController(logger=request.state.logger)
     return controller.login(
         controller_input.username,
         controller_input.password,
@@ -36,7 +36,7 @@ async def post_refresh(
 ) -> dict:
     """Endpoint ..."""
     controller_input: RefreshSchema = RefreshSchema.model_validate(await request.json())
-    controller = AuthenticationController()
+    controller = AuthenticationController(logger=request.state.logger)
     return controller.refresh(
         controller_input.refresh,
     )
