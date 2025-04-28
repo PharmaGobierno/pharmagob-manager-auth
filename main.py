@@ -13,8 +13,8 @@ def create_app() -> FastAPI:
     app.add_middleware(LoggerMiddleware)
     app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_origins=["*"],
+    allow_methods=["*"],
     allow_headers=["Authorization", "Content-Type"],
     allow_credentials=True,
     max_age=600,
