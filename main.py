@@ -4,12 +4,21 @@ import uvicorn
 from fastapi import FastAPI, status
 
 from app.libs.logger_middleware import LoggerMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 from app.v1.router import api_router
 
 
 def create_app() -> FastAPI:
     app = FastAPI()
     app.add_middleware(LoggerMiddleware)
+    app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
+    allow_credentials=True,
+    max_age=600,
+)
 
     # Routers
     app.include_router(api_router, prefix="/v1")
